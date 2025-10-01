@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+header {
+  padding: 0.5rem
+}
+
+main {
+  display: flex;
+  height: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  width: 250px;
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+  background-color: #eee;
+}

@@ -24,6 +24,9 @@ Work with local and global datasets that are immediately visual and cover differ
     * **Result:** A map of Philadelphia with a marker for every polling place. Add a popup to each marker that shows the polling place's name when clicked (`L.marker().bindPopup()`).
 
 2. **Map of Historic Markers:**
+
+    Pennsylvania has a process whereby communities can apply to have a historic marker placed at a significant site -- you may have seen these blue and gold signs around, as there are many in Philadelphia (they look like this: ![MOVE Bombing Historic Marker](../../images/pa_historic_marker_move.jpg)). The Pennsylvania Historical and Museum Commission (PHMC) provides a [search interface](https://share.phmc.pa.gov/markers/) for these markers, which is built on top of a JSON API.
+
     * **Goal:** Fetch the Historic Markers for a given set of filters and display each marker as a circle marker on a Leaflet map.
     * **Skills:** Use the `fetch` API to get the GeoJSON. Use a `forEach` loop on the `features` array of the resulting GeoJSON object. For each feature, access the coordinates from `feature.geometry.coordinates` and properties like the title from `feature.properties`.
     * **Result:** A map of Philadelphia with a marker for every historic marker. Add a popup to each marker that shows the marker's title when clicked (`L.marker().bindPopup()`).
