@@ -51,8 +51,20 @@ async function getHistoricMarkerData(keyword, categories) {
   //    and prototyping, it's not recommended for production applications.
   // 2. The `markerCategories` parameter can be repeated for multiple
   //    categories, e.g.: &markerCategories=2&markerCategories=3
-
-  // ... Your code here ...
+  const markerCategoryparams= categories.map(code => `&markerCategories=${code}`);
+  const markerCategoriesQuery= markerCategoryparams.join('');
+  const url = `https://corsproxy.io/?url=https://share.phmc.pa.gov/server/api/search/phmcmarkers?keyword=${keyword}&countyCode=${philadelphiaCountyCode}&municipalities=${philadelphiaMunicipalityCode}${markerCategoriesQuery}&markerMissing=`;
+  try{
+    const response = await fetch(url);
+    const data = await response.json();
+    if(response.status !== 200){
+      alert('Something Went wrong, please try again');
+    }
+    return data;
+  } catch (error) {
+    console.error('Error fetching historic marker data:', error);
+    return [];
+  }
 }
 
 /**
@@ -63,8 +75,13 @@ async function getHistoricMarkerData(keyword, categories) {
  */
 async function updateHistoricMarkerLayer(layer, keyword, categories) {
   const historicMarkers = await getHistoricMarkerData(keyword, categories);
-
-  // ... Your code here ...
+  layer.clearLayers();
+  for (const m of historicMarkers){
+    const latitude = m.latitude;
+    const longitude = m.longitude;
+    const marker= L.marker([latitude, longitude]).addTo(layer);
+    marker.bindPopup(`${m.markerText}`);
+  }
 }
 
 /** Handles the form submission event to update the historic marker layer.
