@@ -34,7 +34,13 @@ function initPollingPlaceMap(elementOrId) {
  * @returns {Promise<GeoJSON.FeatureCollection>} The polling place data.
  */
 async function getPollingPlaceData() {
-  // ... Your code here ...
+  const url = `https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+polling_places&filename=polling_places&format=geojson&skipfields=cartodb_id`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  return data;
 }
 
 /**
