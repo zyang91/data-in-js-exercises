@@ -48,8 +48,11 @@ Work with local and global datasets that are immediately visual and cover differ
     * **Result:** A dynamic map showing the planet's recent seismic activity, with larger circles for stronger quakes.
 
 5. **List of Countries by Region:**
+
+    The World Bank provides [several APIs](https://datahelpdesk.worldbank.org/knowledgebase/articles/889386-developer-information-overview) for accessing country-level data. The [Indicators API](https://datahelpdesk.worldbank.org/knowledgebase/articles/889392-about-the-indicators-api-documentation) in particular allows access to various data points about each country (as measured by the World Bank). One simple API endpoint returns a list of all countries in a specified region. For example, to get all countries in "Latin America & Caribbean", you can use this URL: [http://api.worldbank.org/v2/region/LCN/country?format=json](http://api.worldbank.org/v2/region/LCN/country?format=json), or to get the countries across all regions, you can use [http://api.worldbank.org/v2/country?format=json](http://api.worldbank.org/v2/country?format=json). You can find detailed information about the API call structure at <https://datahelpdesk.worldbank.org/knowledgebase/articles/898581>.
+
     * **Goal:** Use the World Bank API to fetch all countries in a specific region (e.g., "Latin America & Caribbean") and display their names in an HTML list.
-    * **Skills:** `fetch` data from a JSON-based API. The World Bank API returns an array where the first element contains metadata and the second contains the data array, so students will need to access the correct part of the response (`data[1]`). They'll then loop through this array to create and append `<li>` elements to the DOM.
+    * **Skills:** `fetch` data from a JSON-based API. The World Bank API returns an array where the first element contains metadata and the second contains the data array, so you will need to access the correct part of the response (`data[1]`). You'll then loop through this array to create and append `<li>` elements to the DOM.
     * **Result:** A simple webpage listing the countries of a selected world region.
 
 6. **Chart of Air Quality in a Major City:**
