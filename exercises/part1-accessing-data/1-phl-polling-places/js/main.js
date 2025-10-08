@@ -42,7 +42,7 @@ async function getPollingPlaceData() {
   const data = await response.json();
   return data;
 }
-
+import _ from "https://cdn.jsdelivr.net/npm/lodash@4.17.21/+esm";
 /**
  * Creates a Leaflet GeoJSON layer for polling places and adds it to the map.
  * @param {L.Map} map The Leaflet map where the layer will be added.
@@ -69,7 +69,10 @@ async function initPollingPlaceLayer(map) {
       return L.marker(latlng, { icon: icon });
     },
     onEachFeature: (feature, layer) => {
-      layer.bindPopup(`...`);
+      layer.bindPopup(`
+        <span class="polling-place-name">${_.startCase(feature.properties.placename.toLowerCase())}</span><br/>
+        <span class="polling-place-address">${feature.properties.street_address}</span>
+      `);
     }
   }).addTo(map);
 

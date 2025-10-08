@@ -18,3 +18,8 @@ main {
   height: 100%;
   background-color: #eee;
 }
+
+.polling-place-name {
+  display:block;
+  font-weight: bold;
+}
