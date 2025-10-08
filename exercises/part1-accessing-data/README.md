@@ -40,8 +40,11 @@ Work with local and global datasets that are immediately visual and cover differ
     * **Result:** A simple webpage displaying a numbered list of the most recent 311 calls.
 
 4. **Map of Recent Earthquakes:** 🗺️
+
+    The United States Geological Survey (USGS) provides a real-time GeoJSON feed of earthquakes worldwide. You can find the feeds at <https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php>. Note that points in these GeoJSON feeds are comprised of three coordinates: longitude, latitude, and [depth](https://earthquake.usgs.gov/data/comcat/index.php#depth) (in kilometers). The GeoJSON specification allows for [three-dimensional points](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.1), even though many mapping libraries only use the first two dimensions (longitude and latitude).
+
     * **Goal:** Fetch the GeoJSON feed for all earthquakes in the past 7 days from the USGS and display them on a world map.
-    * **Skills:** Use `fetch` to get the GeoJSON feed. Loop through the `features` array. For each earthquake, use its magnitude (`feature.properties.mag`) to determine the radius of a `L.circleMarker` and display its location and title in a popup.
+    * **Skills:** Use `fetch` to get the real-time GeoJSON feed. Loop through the `features` array. For each earthquake, use its magnitude (`feature.properties.mag`) to determine the radius of a `L.circleMarker`, use its depth (`feature.geometry.coordinates[2]`) to determine the color, and display its `title` (and any other useful information) in a popup.
     * **Result:** A dynamic map showing the planet's recent seismic activity, with larger circles for stronger quakes.
 
 5. **List of Countries by Region:**
