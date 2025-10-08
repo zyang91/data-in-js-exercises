@@ -33,8 +33,8 @@ Work with local and global datasets that are immediately visual and cover differ
 
 3. **List of Most Recent 311 Calls:**
 
-    The City of Philadelphia makes a feed of 311 calls available in CSV format. For example, you can download the 100 most recent calls with this URL: `https://phl.carto.com/api/v2/sql?filename=public_cases_fc&format=csv&skipfields=cartodb_id,the_geom,the_geom_webmercator&q=SELECT * FROM public_cases_fc ORDER BY requested_datetime DESC LIMIT 100`
-    
+    The City of Philadelphia makes a feed of 311 calls available in CSV format. For example, you can download the 100 most recent calls with this URL: [https://phl.carto.com/api/v2/sql?filename=public_cases_fc&format=csv&skipfields=cartodb_id,the_geom,the_geom_webmercator&q=SELECT * FROM public_cases_fc ORDER BY requested_datetime DESC LIMIT 100](https://phl.carto.com/api/v2/sql?filename=public_cases_fc&format=csv&skipfields=cartodb_id,the_geom,the_geom_webmercator&q=SELECT+*+FROM+public_cases_fc+ORDER+BY+requested_datetime+DESC+LIMIT+100)
+
     * **Goal:** Fetch a CSV dataset containing an array of the most recent 311 calls. Dynamically create an ordered list in the HTML.
     * **Skills:** `fetch` a CSV file. Use `forEach` or a `for...of` loop to iterate through the array. For each call, use `document.createElement('li')` and `element.textContent` to create a list item, then `appendChild` to add it to an existing `<ol>` in the DOM.
     * **Result:** A simple webpage displaying a numbered list of the most recent 311 calls.
