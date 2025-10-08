@@ -17,9 +17,11 @@ Here, you'll move beyond simple display to transforming data. We introduce array
 ### **Exercise Ideas**
 
 1. **Filtering 311 Calls by Type:**
-    * **Goal:** Display 311 calls on a map but allow the user to filter what's visible. For example, have buttons for "Potholes," "Graffiti," and "Abandoned Cars."
-    * **Skills:** Use the `Array.prototype.filter()` method. When a user clicks a button, filter the master array of 311 calls to create a *new* array containing only requests of that type (e.g., `where feature.properties.service_name === 'Pothole Repair'`). Then, clear the existing markers from the map and add new ones from the filtered array.
-    * **Result:** An interactive map where a user can toggle different categories of service requests.
+    Here we will build on the 311 calls list from Part 1. Instead of just displaying the most recent calls, we will display charts with certain aggregated metrics, and allow the user to filter by type of service.
+
+    * **Goal:** Display most recent 311 calls in a list, and two charts: one showing the number of calls by type, and another showing the share of calls for each status. Allow the user to filter what's visible. For example, clicking a bar in the "calls by type" chart should filter the list and the "status" chart to only show calls of that type. Clicking on the same bar again should remove the filter.
+    * **Skills:** Use the `Array.prototype.filter()` method. When a user clicks a button, filter the master array of 311 calls to create a *new* array containing only requests of that type (e.g., `where service_name === 'Pothole Repair'`). Then, clear the existing items from the list and add new ones from the filtered array.
+    * **Result:** An interactive chart where a user can toggle different categories of service requests.
 
 2. **Deduplicating Polling Places:**
     * **Goal:** In the data, since multiple precincts may vote at a given polling place, there are duplicate entries for many polling places (e.g. precincts 0107, 3927, and 3932 all vote at the Bok building, but each have separate features in the download data). Ensure that each polling place is represented only once.
