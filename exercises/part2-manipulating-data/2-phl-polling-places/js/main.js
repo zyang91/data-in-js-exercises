@@ -14,7 +14,7 @@ INSTRUCTIONS
     of precincts that vote at the polling place.
 
 */
-
+import * as turf from 'https://cdn.jsdelivr.net/npm/@turf/turf@7.2.0/+esm'
 
 /**
  * Creates a polling places Leaflet map object.
@@ -36,9 +36,53 @@ function initPollingPlaceMap(elementOrId) {
  * @returns {Promise<GeoJSON.FeatureCollection>} The deduplicated polling place data.
  */
 async function getPollingPlaceData() {
-  // ... Your code here ...
+  const url = `https://phl.carto.com/api/v2/sql?q=SELECT+*+FROM+polling_places&filename=polling_places&format=geojson&skipfields=cartodb_id`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  const data = await response.json();
+  // AGGREGATE THE DATA by polling place before returning.
+  const aggregatedData= {
+    type: "FeatureCollection",
+    features:data.features.reduce((pollingPlaces, precinct) => {
+      const placename= precinct.properties.placename;
+      let pollingPlace= pollingPlaces.find(pp => pp.properties.placename==placename);
+      if(!pollingPlace){
+        pollingPlace={
+          type: "Feature",
+          properties:{
+            placename: placename,
+            street_address: precinct.properties.street_address,
+            zip_code: precinct.properties.zip_code,
+            accessibility_code: precinct.properties.accessibility_code,
+            parking_code: precinct.properties.parking_code,
+            precincts: [{
+              ward: precinct.properties.ward,
+              division: precinct.properties.division,
+              precinct: precinct.properties.precinct,
+          }]
+          },
+          geometry: { ...precinct.geometry },
+        }
+        pollingPlaces.push(pollingPlace);
+      }
+      else{
+        pollingPlace.properties.precincts.push({
+          ward: precinct.properties.ward,
+          division: precinct.properties.division,
+          precinct: precinct.properties.precinct,
+        });
+        const distance= turf.distance(turf.point(pollingPlace.geometry.coordinates), turf.point(precinct.geometry.coordinates), { units: 'meters' });
+        if (distance>100){
+          console.warn('distance between the polling place and the precint is greater 50m', distance, placename);
+        }
+      }
+      return pollingPlaces;
+    },[])
+  }
+  return aggregatedData;
 }
-
 /**
  * Creates a Leaflet GeoJSON layer for polling places and adds it to the map.
  * @param {L.Map} map The Leaflet map where the layer will be added.
