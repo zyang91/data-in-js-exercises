@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Philadelphia 311 Calls - Interactive Dashboard</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+  
+  <script type="importmap">
+    {
+      "imports": {
+        "chart.js/auto": "https://cdn.jsdelivr.net/npm/chart.js@4.5.0/auto/+esm"
+      }
+    }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Philadelphia 311 Calls Dashboard</h1>
+      <p>Interactive charts and filtered lists of recent citizen service requests</p>
+    </header>
+
+    <main>
+      <div class="dashboard-grid">
+        <!-- Charts Section -->
+        <div class="charts-section">
+          <div class="chart-container">
+            <h3>Calls by Service Type</h3>
+            <canvas id="calltype-chart"></canvas>
+          </div>
+          
+          <div class="chart-container">
+            <h3>Calls by Status</h3>
+            <canvas id="status-chart"></canvas>
+          </div>
+        </div>
+
+        <!-- Calls List Section -->
+        <div class="calls-section">
+          <div id="info-panel">
+            <h2>Recent 311 Calls</h2>
+            <div id="loading">Loading data...</div>
+            <div id="data-info" class="hidden">
+              <p>Showing <span id="call-count">0</span> calls</p>
+              <div id="filter-info" class="hidden">
+                <p>Filtered by: <span id="filter-description"></span> 
+                <button id="clear-filter" class="clear-filter-btn">Clear Filter</button></p>
+              </div>
+            </div>
+          </div>
+
+          <div id="calls-container">
+            <ol id="calls-list">
+              <!-- 311 calls will be dynamically added here -->
+            </ol>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
