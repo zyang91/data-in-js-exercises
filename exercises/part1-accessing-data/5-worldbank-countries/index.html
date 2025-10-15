@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Bank Countries</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>World Bank Countries</h1>
+      <p>Explore countries by region using the World Bank API</p>
+    </header>
+
+    <main>
+      <div id="controls-panel">
+        <h2>Select a Region</h2>
+        <div class="region-selector">
+          <label for="region-select">Region:</label>
+          <select id="region-select">
+            <option value="">All Regions</option>
+            <option value="EAS">East Asia & Pacific</option>
+            <option value="ECS">Europe & Central Asia</option>
+            <option value="LCN">Latin America & Caribbean</option>
+            <option value="MEA">Middle East & North Africa</option>
+            <option value="NAC">North America</option>
+            <option value="SAS">South Asia</option>
+            <option value="SSF">Sub-Saharan Africa</option>
+          </select>
+          <button id="load-countries" type="button">Load Countries</button>
+        </div>
+      </div>
+
+      <div id="info-panel">
+        <div id="loading" class="hidden">Loading countries...</div>
+        <div id="data-info" class="hidden">
+          <p>Showing <span id="country-count">0</span> countries:</p>
+        </div>
+        <div id="error-message" class="hidden error">
+          <p>Error loading countries. Please try again.</p>
+        </div>
+      </div>
+
+      <div id="countries-container">
+        <ul id="countries-list">
+          <!-- Countries will be dynamically added here -->
+        </ul>
+        <div id="load-more" class="hidden">Loading more countries...</div>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
